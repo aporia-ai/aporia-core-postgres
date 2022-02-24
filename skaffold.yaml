@@ -1,0 +1,5 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+build:
+  artifacts:
+    - image: ghcr.io/aporia-core-postgres
