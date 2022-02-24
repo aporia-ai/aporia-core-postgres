@@ -7,15 +7,12 @@ install-deps:
 	@sudo wget https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver -O /usr/bin/semver
 	@sudo chmod +x /usr/bin/semver
 
-	@echo [!] Installing yq
-	@sudo wget https://github.com/mikefarah/yq/releases/download/v4.6.1/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
-
 	@echo [!] Installing skaffold
 	@curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo install skaffold /usr/local/bin/
 
 
 build:
-	skaffold build --tag=ng-$(NEW_VERSION)
+	skaffold build --tag=$(NEW_VERSION)
 
 bump-version:
 	$(eval CURRENT_VERSION=$(shell git for-each-ref --sort=-v:refname --count=1 refs/tags/[0-9]*.[0-9]*.[0-9]* refs/tags/v[0-9]*.[0-9]*.[0-9]* | cut -d / -f 3-))
